@@ -1,0 +1,41 @@
+{
+  "relatiesoort": ["Klant", "Leverancier"],
+  "modifiedOn": "2024-03-05T10:20:30",
+  "relatiecode": 1042,
+  "naam": "Jansen Installatie B.V.",
+  "vestigingsAdres": {
+    "contactpersoon": "A. Jansen",
+    "straat": "Dorpsstraat 12",
+    "postcode": "1234 AB",
+    "plaats": "Utrecht",
+    "land": { "id": "6b1f4e0e-5a58-4b0a-9c0d-0b8a3f6d2c11" }
+  },
+  "correspondentieAdres": {
+    "straat": "Postbus 1",
+    "postcode": "1234 AC",
+    "plaats": "Utrecht"
+  },
+  "telefoon": "030-1234567",
+  "mobieleTelefoon": "06-12345678",
+  "email": "info@jansen-installatie.nl",
+  "btwNummer": "NL123456789B01",
+  "factuurkorting": 2.5,
+  "krediettermijn": 30,
+  "bankieren": true,
+  "nonactief": false,
+  "kredietLimiet": 5000.5,
+  "memo": "Vaste klant",
+  "kvkNummer": "12345678",
+  "oin": "00000001234567890000",
+  "websiteUrl": "https://jansen-installatie.nl",
+  "aanmaningsoort": "Onderneming",
+  "offerteEmailVersturen": { "shouldSend": true, "email": "offerte@jansen-installatie.nl", "ccEmail": "cc@jansen-installatie.nl" },
+  "factuurEmailVersturen": { "shouldSend": false },
+  "ublBestandAlsBijlage": true,
+  "iban": "NL91ABNA0417164300",
+  "bic": "ABNANL2A",
+  "incassoSoort": "Core",
+  "factuurRelatie": { "id": "0f8fad5b-d9cb-469f-a165-70867728950e" },
+  "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301",
+  "extraVeldenKlant": [{ "naam": "Debiteurnummer", "waarde": "D-17" }]
+}

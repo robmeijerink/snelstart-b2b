@@ -1,0 +1,16 @@
+{
+  "administratieIdentifier": "b3b0e5a4-0d62-4f34-9b19-1d0f0c6f2a11",
+  "administratieNaam": "Demo administratie",
+  "bedrijfsnaam": "Demo B.V.",
+  "huidigBoekjaar": 2024,
+  "btwAangiftePeriodeSoort": "Kwartaal",
+  "icpAangiftePeriodeSoort": "Maand",
+  "rechtsvorm": "Bv",
+  "voorraadSysteem": "Fifo",
+  "kleineOndernemersregeling": {
+    "isKleineOndernemersRegelingActief": false,
+    "maximaalBedragVolledigeVerrekening": 1345,
+    "maximaalBedragKleineOndernemersRegeling": 2000
+  },
+  "volgendFactuurnummer": 2025001
+}

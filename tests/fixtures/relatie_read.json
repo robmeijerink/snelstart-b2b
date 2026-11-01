@@ -1,0 +1,12 @@
+{
+  "relatiesoort": ["Klant"],
+  "modifiedOn": "2024-03-05T10:20:30.123",
+  "relatiecode": 7,
+  "naam": "Pietersen",
+  "fax": "030-7654321",
+  "inkoopBoekingenUri": "https://b2bapi.snelstart.nl/v2/relaties/3f2504e0-4f89-41d3-9a0c-0305e82c3301/inkoopboekingen",
+  "verkoopBoekingenUri": "https://b2bapi.snelstart.nl/v2/relaties/3f2504e0-4f89-41d3-9a0c-0305e82c3301/verkoopboekingen",
+  "id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301",
+  "uri": "https://b2bapi.snelstart.nl/v2/relaties/3f2504e0-4f89-41d3-9a0c-0305e82c3301",
+  "veldDatNogNietBestaat": 1
+}

@@ -1,0 +1,39 @@
+[package]
+name = "snelstart-b2b"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Unofficial async client for the SnelStart B2B API v2"
+license = "MIT"
+repository = "https://github.com/robmeijerink/snelstart-b2b"
+readme = "README.md"
+keywords = ["snelstart", "accounting", "api-client", "odata"]
+categories = ["api-bindings", "web-programming::http-client"]
+exclude = [".github"]
+
+[features]
+default = ["rustls-tls"]
+rustls-tls = ["reqwest/rustls-tls"]
+native-tls = ["reqwest/native-tls"]
+
+[dependencies]
+base64 = "0.22"
+chrono = { version = "0.4", default-features = false, features = ["serde", "std"] }
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+reqwest = { version = "0.12", default-features = false }
+rust_decimal = { version = "1", features = ["serde-with-float"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", default-features = false, features = ["sync"] }
+url = "2"
+uuid = { version = "1", features = ["serde"] }
+
+[dev-dependencies]
+futures = "0.3"
+pretty_assertions = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+wiremock = "0.6"
+
+[package.metadata.docs.rs]
+all-features = true

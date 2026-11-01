@@ -1,0 +1,4 @@
+[
+  { "code": "REL-0007", "message": "Naam moet gevuld zijn" },
+  { "code": "REL-0013", "message": "Telefoon mag maximaal 25 karakters bevatten" }
+]
