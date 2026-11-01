@@ -208,7 +208,7 @@ impl Client {
             .get(url)
             .header(ACCEPT, "application/json")
             .header(SUBSCRIPTION_HEADER, self.inner.subscription_key.expose());
-        decode(&self.finish(request.send().await).await?)
+        decode(&self.finish(request.send().await, None).await?)
     }
 
     pub async fn forget_token(&self) {
@@ -314,7 +314,7 @@ impl Client {
                 .header(CONTENT_TYPE, "application/json")
                 .body(body.to_vec());
         }
-        self.finish(request.send().await).await
+        self.finish(request.send().await, Some(token)).await
     }
 
     async fn token(&self) -> Result<Issued> {
@@ -333,11 +333,15 @@ impl Client {
             ])
             .send()
             .await;
-        let body = self.finish(response).await?;
+        let body = self.finish(response, None).await?;
         serde_json::from_str(&body).map_err(Error::from)
     }
 
-    async fn finish(&self, response: reqwest::Result<reqwest::Response>) -> Result<String> {
+    async fn finish(
+        &self,
+        response: reqwest::Result<reqwest::Response>,
+        token: Option<&str>,
+    ) -> Result<String> {
         let response = response?;
         let status = response.status();
         let retry_after = response
@@ -356,16 +360,17 @@ impl Client {
             status => Err(Error::Api {
                 status,
                 errors: find_codes(&body),
-                body: self.redact(body),
+                body: self.redact(body, token),
             }),
         }
     }
 
-    fn redact(&self, mut text: String) -> String {
-        for secret in [
+    fn redact(&self, mut text: String, token: Option<&str>) -> String {
+        let keys = [
             self.inner.client_key.expose(),
             self.inner.subscription_key.expose(),
-        ] {
+        ];
+        for secret in keys.into_iter().chain(token) {
             text = text.replace(secret, "[redacted]");
         }
         text

@@ -96,21 +96,21 @@ async fn server_errors_are_api_errors_and_not_retried() {
 }
 
 #[tokio::test]
-async fn keys_echoed_in_an_error_body_are_redacted() {
+async fn keys_and_token_echoed_in_an_error_body_are_redacted() {
     let (server, client) = setup().await;
-    mount_token(&server, "tok").await;
+    mount_token(&server, "access-token-789").await;
     Mock::given(method("GET"))
         .and(path("/v2/relaties"))
-        .respond_with(
-            ResponseTemplate::new(400)
-                .set_body_string(format!("bad {SUBSCRIPTION_KEY} / {CLIENT_KEY}")),
-        )
+        .respond_with(ResponseTemplate::new(400).set_body_string(format!(
+            "bad {SUBSCRIPTION_KEY} / {CLIENT_KEY} / access-token-789"
+        )))
         .mount(&server)
         .await;
 
     let err = client.relaties().list(&Query::new()).await.unwrap_err();
     let shown = format!("{err:?}");
     assert!(!shown.contains(SUBSCRIPTION_KEY) && !shown.contains(CLIENT_KEY));
+    assert!(!shown.contains("access-token-789"));
 }
 
 #[tokio::test]
@@ -320,4 +320,20 @@ async fn reports_send_the_period_as_query_parameters() {
     let end = "2024-03-31".parse().unwrap();
     let lines = client.get_periodebalans(start, end).await.unwrap();
     assert_eq!(lines[0].grootboek_nummer, Some(1000));
+}
+
+#[tokio::test]
+async fn a_connection_failure_shows_no_keys() {
+    let client = snelstart_b2b::Client::builder(
+        snelstart_b2b::ClientKey::new(CLIENT_KEY).unwrap(),
+        snelstart_b2b::SubscriptionKey::new(SUBSCRIPTION_KEY).unwrap(),
+    )
+    .token_url("http://127.0.0.1:1/token")
+    .build()
+    .unwrap();
+
+    let err = client.company_info().await.unwrap_err();
+    assert!(matches!(err, Error::Transport(_)));
+    let shown = format!("{err} {err:?}");
+    assert!(!shown.contains(CLIENT_KEY) && !shown.contains(SUBSCRIPTION_KEY));
 }
