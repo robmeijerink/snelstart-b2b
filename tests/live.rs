@@ -5,9 +5,19 @@ use snelstart_b2b::Client;
 use snelstart_b2b::models::kostenplaatsen::Kostenplaats;
 use snelstart_b2b::odata::Query;
 
+/// Loads a `.env` file from the working directory, once, before the first variable is read.
+/// Variables that are already set win over the file.
+fn load_env() {
+    static LOAD: std::sync::Once = std::sync::Once::new();
+    LOAD.call_once(|| {
+        dotenvy::dotenv().ok();
+    });
+}
+
 #[tokio::test]
 #[ignore = "talks to the real SnelStart API"]
 async fn credentials_and_company_info() {
+    load_env();
     let client = Client::from_env().unwrap();
     client.echo().await.unwrap();
     let info = client.company_info().await.unwrap();
@@ -17,6 +27,7 @@ async fn credentials_and_company_info() {
 #[tokio::test]
 #[ignore = "talks to the real SnelStart API"]
 async fn kostenplaats_round_trip() {
+    load_env();
     let client = Client::from_env().unwrap();
     let new_cost_centre = Kostenplaats {
         omschrijving: Some("snelstart-b2b live test".to_owned()),

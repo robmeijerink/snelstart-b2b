@@ -223,6 +223,8 @@ The unit and integration tests run against a mock server. To exercise the real A
 SNELSTART_CLIENT_KEY=... SNELSTART_SUBSCRIPTION_KEY=... cargo test --test live -- --ignored
 ```
 
+The live tests also read a `.env` file in the project root: copy `.env.example` to `.env` and fill it in. Variables that are already set in your environment win over the file. The crate itself never reads `.env`.
+
 The live tests create and delete one kostenplaats in the administration the client key belongs to.
 
 ## License
