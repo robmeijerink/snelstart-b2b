@@ -1,13 +1,13 @@
 [package]
 name = "snelstart-b2b"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.85"
 description = "Unofficial async client for the SnelStart B2B API v2"
 license = "MIT"
 repository = "https://github.com/robmeijerink/snelstart-b2b"
 readme = "README.md"
-keywords = ["snelstart", "accounting", "api-client", "odata"]
+keywords = ["snelstart", "accounting", "bookkeeping", "api-client", "odata"]
 categories = ["api-bindings", "web-programming::http-client"]
 exclude = [".github"]
 

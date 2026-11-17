@@ -202,6 +202,16 @@ match client.relaties().create(&new_relation).await {
 
 Requests time out after 30 seconds (10 seconds to connect); change it with `Client::builder(..).timeout(..)`. Redirects are not followed. If you pass your own `reqwest::Client` with `http_client`, its settings apply as is.
 
+## Examples
+
+The [`examples`](examples) folder has a runnable example for each part of the client: keys, clients and administrations, reading, querying and paging, sales, purchases, bookings, btw, prices, documents, reports, errors, raw requests and the validated types. They read the keys from the environment or a `.env` file, like the live tests:
+
+```sh
+cargo run --example check_keys
+```
+
+`kostenplaatsen_crud`, `artikelen_crud`, `relaties_write` and `raw_requests` create and delete a record in the administration the client key belongs to. Examples that change existing data (bookings, btw status, documents, bank statements, company info) only print what they would send, unless `SNELSTART_EXAMPLE_SEND` is set.
+
 ## Features
 
 | Feature | Default | |
